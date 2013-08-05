@@ -1,0 +1,4 @@
+*****
+Use to mass convert .DV files.
+Loop through all directories below where script is run
+and encode all video files with the command line version of handbrake.

@@ -1,0 +1,5 @@
+*****
+This bash script will loop through all directories below where the script is run
+and encode all video files with the command line version of handbrake.  Great when 
+you have a massive amount of raw .DV files to convert.
+By Cory Gugler

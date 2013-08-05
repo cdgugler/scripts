@@ -1,0 +1,10 @@
+*****
+Dupeframes
+==========
+Duplicate all images in current dir that match specified input and name incrementally.  Used for blender animated texturing.
+
+Shaveframes
+===========
+Shave top off of images in current dir.
+
+

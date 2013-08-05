@@ -1,0 +1,9 @@
+#!/bin/bash
+echo Enter location to save video:
+read saveDirectory
+for each in *.MTS;
+do
+  NEWNAME=$(date -r "$each" +"%Y-%b-%d_%H%M%S").MTS
+  cp "$each" "$saveDirectory/$NEWNAME"
+  echo "Video location: $saveDirectory/$NEWNAME"
+done

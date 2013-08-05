@@ -1,0 +1,20 @@
+#!/bin/bash
+
+E_BADARGS=85
+
+if [ ! -n "$1" ]
+then
+    echo "Usage: autoren basefilename"
+    exit $E_BADARGS
+fi
+
+index=1
+mkdir -p ./Duplicated
+for i in $1*.png
+do
+    for j in 1 2 3 4 5
+    do
+        echo cp "$i" "./Duplicated/"$1$((index)).png
+        cp "$i" "./Duplicated/"$1$((index++)).png
+    done
+done

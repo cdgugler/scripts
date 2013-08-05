@@ -1,0 +1,10 @@
+#!/bin/bash
+# convert Record-Player-1.png -shave 75x75 test.png
+# mv "$i" "./Duplicated/Player-"$((index++)).png
+
+index=1
+for i in *.png
+do
+    convert "$i" -shave 75x75 "./shaved/$i.png"
+    # cp "$i" "./Duplicated/Record-Player-"$((index++)).png
+done

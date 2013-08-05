@@ -1,0 +1,5 @@
+*****
+Sony Cam dumper
+Simple Bash script to copy files from Sony AVCHD cam to local dir.
+Script will rename files to the last date/time the file was modified.
+By Cory Gugler

@@ -1,0 +1,53 @@
+#!/bin/bash
+# Encode all files in child directories with Handbrake
+# Outputs to encoded.log
+
+# Get all files and print which will be encoded
+
+echo "The following files will be encoded:"
+for DIR in *
+do
+   cd $DIR
+   if ls *.dv > /dev/null 2>&1; then
+      for f in *.dv
+      do
+         if [ -f $f.m4v ]; then
+            # Don't need to encode that one
+            echo "Skipped $f, already exists" >> ../encoded.log
+         else
+            echo $f
+         fi
+      done
+   else
+      echo "No .dv files in $DIR" 
+   fi
+   cd ..
+done
+echo "Continue?[Y/n]"
+read response
+if [ "$response" == "Y" ] || [ "$response" == "" ]; then
+   echo "Here we go!"
+   for DIR in *
+   do
+      cd $DIR
+      # Make sure there are .dv files in dir before entering loop
+      if ls *.dv > /dev/null 2>&1; then
+         for f in *.dv
+         do
+            if [ -f $f.m4v ]; then
+               echo "File already exists, skipping encode of $f"
+            else
+            HandBrakeCLI -i $f -o $f.m4v --preset="Normal"
+            echo $f >> ../encoded.log
+            fi
+         done
+      else
+         echo "No .dv files in $DIR" >> ../encoded.log
+      fi
+      cd ..
+   done
+
+   echo "All Done!"
+else
+   echo "Ok, maybe later."
+fi

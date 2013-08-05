@@ -1,0 +1,36 @@
+#!/bin/bash
+# Split Video
+# Input Beginning time, End Time and File name
+
+video="HomeVideo001.m4v"
+echo "Spliting $video"
+echo -n "Enter beginning time (xx:xx:xx):"
+read begTime
+echo -n "Enter end time:"
+read endTime
+echo -n "Enter split file name:"
+read splitName
+echo "Executing Split..."
+#Verify Input is at least 6 chars, add 0's to beginning if not
+#This allows for quick entry without :'s
+#len=${#begTime}
+#theZero=0
+#while [ $len -le 6 ]
+#do
+#   begTime=${begTime}
+#   len=${theZero}${#begTime}
+#done
+#echo "begTime is $begTime after while loop"
+#First calculate -t var
+SaveIFS="$IFS"
+IFS=":"
+begSeconds=($begTime)
+endSeconds=($endTime)
+startSeconds=$((${begSeconds[0]}*3600 + ${begSeconds[1]}*60 + ${begSeconds[2]}))
+endingSeconds=$((${endSeconds[0]}*3600 + ${endSeconds[1]}*60 + ${endSeconds[2]}))
+Seconds=$((endingSeconds-startSeconds))
+IFS="$SavedIFS"
+$(ffmpeg -ss $begTime -t $Seconds -i $video -acodec copy -vcodec copy -scodec copy $splitName)
+echo "Split Done"
+echo "File is $Seconds seconds"
+echo "Encoded file $splitName"
