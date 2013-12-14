@@ -1,0 +1,23 @@
+#!/bin/bash
+# Make me a sandwich. No? Fine then
+# Make a new virtualhost
+
+if [ $# -eq 1 ]; then
+    echo "Creating $1"
+    read -r -p "You sure about that? [y/N] " response
+    response=${response,,}
+    if [[ $response =~ ^(yes|y)$ ]]
+    then
+        mkdir /var/www/$1
+        mkdir /var/www/$1/htdocs
+        cp /etc/apache2/sites-available/addlime.dev /etc/apache2/sites-available/$1
+        sed -i "s/addlime.dev/$1/g" /etc/apache2/sites-available/$1
+        a2ensite $1
+        service apache2 reload
+        echo "Job's Done."
+    else
+        echo "K. Bye"
+    fi
+else
+    echo "Huh? Usage: newdev servername.dev"
+fi
